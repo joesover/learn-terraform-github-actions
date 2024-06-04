@@ -4,7 +4,7 @@ on:
   pull_request:
 
 env:
-  TF_CLOUD_ORGANIZATION: "YOUR-ORGANIZATION-HERE"
+  TF_CLOUD_ORGANIZATION: "joes-demos"
   TF_API_TOKEN: "${{ secrets.TF_API_TOKEN }}"
   TF_WORKSPACE: "learn-terraform-github-actions"
   CONFIG_DIRECTORY: "./"
@@ -25,7 +25,7 @@ jobs:
         uses: hashicorp/tfc-workflows-github/actions/upload-configuration@v1.0.0
         id: plan-upload
         with:
-          workspace: ${{ env.TF_WORKSPACE }}
+          workspace: demo-workspace
           directory: ${{ env.CONFIG_DIRECTORY }}
           speculative: true
 
@@ -33,7 +33,7 @@ jobs:
         uses: hashicorp/tfc-workflows-github/actions/create-run@v1.0.0
         id: plan-run
         with:
-          workspace: ${{ env.TF_WORKSPACE }}
+          workspace: demo-workspace
           configuration_version: ${{ steps.plan-upload.outputs.configuration_version_id }}
           plan_only: true
 
