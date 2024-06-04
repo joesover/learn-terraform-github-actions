@@ -50,6 +50,10 @@ resource "aws_instance" "web" {
               echo "Hello World" > /var/www/html/index.html
               systemctl restart apache2
               EOF
+
+  tags = {
+    Name = "HelloWorld"
+  }
 }
 
 resource "aws_security_group" "web-sg" {
